@@ -1,0 +1,10 @@
+$NetBSD$
+
+--- perl/imap/Makefile.PL.in.orig	2015-11-30 06:30:33.000000000 +0000
++++ perl/imap/Makefile.PL.in
+@@ -77,4 +77,5 @@ WriteMakefile(
+     # behaviour of the generated Makefile which moves itself aside
+     # on a 'make clean' instead of on 'make distclean'.
+     'MAKEFILE_OLD' => 'Makefile',
++    'INSTALLDIRS' => 'vendor',
+ );

@@ -1,0 +1,27 @@
+$NetBSD$
+
+SHA1 (cyrus-imapd-2.5.7.tar.gz) = 2ea13e34857eee7a991800b4db773f39adf0b96f
+RMD160 (cyrus-imapd-2.5.7.tar.gz) = 9be8b4e1e66685c7992cc44787541c64111b5a5f
+SHA512 (cyrus-imapd-2.5.7.tar.gz) = 7514779cb3e36fb76bddfd12c7ec8d986609af671f8a1f0f3ae5007f5a7aa80c3c440bfbc8e7766d4de178dd5aa704076401b35cb5f03a2e25d2ea97ccbc7642
+Size (cyrus-imapd-2.5.7.tar.gz) = 2928358 bytes
+SHA1 (patch-Makefile.am) = 4dc1e295cd8c82085ac7d9fa7a7e5988eb408239
+SHA1 (patch-configure.ac) = 61ee1c408e52c044dd178b8ee057fcc5d9bdbf7f
+SHA1 (patch-imap_annotate.c) = 9bb274cd75e199b92e2c33526b6427e6cb45e263
+SHA1 (patch-imap_ctl__cyrusdb.c) = bdc2af98034b240f6e56529262e9cd271f1bacae
+SHA1 (patch-imap_cyr__dbtool.c) = 11b3bb22762b3724801d94d2e7fe708aa66c31c4
+SHA1 (patch-imap_imap__proxy.c) = afa3b949ac0f28e1cd22fd218a8b8b994b1dc6b6
+SHA1 (patch-imap_imap__proxy.h) = 6ffa02d8d1c9cf1394b915bfcc677ca1f742b02a
+SHA1 (patch-imap_imapd.c) = a745dda0956c95f5203f539dc0ed936211b2e55f
+SHA1 (patch-imap_mbdump.c) = c8c45db9d53e0d2249fc7690feaca12425f264d6
+SHA1 (patch-imap_mboxlist.c) = bc1f6ecee763859032cfd1516d6e3ead1335dd7c
+SHA1 (patch-imap_mboxname.c) = 63fc3596976d3613d1d60afb317408887568ad5a
+SHA1 (patch-imap_mupdate.c) = 9b1253fedd82b1b6f188df671941aca3bad23988
+SHA1 (patch-imap_protocol.h) = 7972c347e981e075266c92439961874e455caae8
+SHA1 (patch-lib-arrayu64.c) = 867756c1e5b57595d5dc1360972ef3334448feb8
+SHA1 (patch-lib-cyrusdb_quotalegacy.c) = 971af23eeed53b185f8fcd0318065c50974fee16
+SHA1 (patch-lib-strarray.c) = 25dfc19bca38692e0bf4c5586a7ef820e7b7a2fb
+SHA1 (patch-man_master.8) = 452b0acbc2dafb53976f9774a79a530ec25eb7b2
+SHA1 (patch-master_service.c) = 3f44104409fe59ef543fdc554c83421db6ff0d23
+SHA1 (patch-perl-imap-makefile.pl.in) = 57eaf7de7ec08a55c3cc7c2455468370b67201ea
+SHA1 (patch-perl-sieve-managesieve-makefile.PL.in) = abfe890ac730f55840f9e7f68f77f539ca80ddeb
+SHA1 (patch-tools_config2header) = 9508d9295a0c0d687326052bb56863dd5d233630
