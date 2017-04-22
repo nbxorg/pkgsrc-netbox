@@ -52,6 +52,7 @@ CONFIGURE_ARGS+= --with-perl=${PERL5:Q}
 CONFIGURE_ARGS+= --with-pgsql=${BUILDLINK_PREFIX.postgresql96-client}
 .include "../../databases/postgresql96-client/buildlink3.mk"
 
+.include "../../databases/sqlite3/buildlink3.mk"
 .include "../../time/libical/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../www/nghttp2/buildlink3.mk"
@@ -68,5 +69,31 @@ CONFIGURE_ARGS+= --enable-replication
 MAKE_ENV+= PERL=${PERL5:Q}
 
 .include "../../mk/pthread.buildlink3.mk"
+
+post-patch:
+	cd ${WRKSRC}; \
+	set --	deliver 8 fetchnews 8 idled 8 imapd 8 lmtpd 8 master 8 \
+		nntpd 8 httpd 8 notifyd 8 pop3d 8 quota 8; \
+	while [ $$# -gt 0 ]; do	\
+		man=$$1.$$2; \
+		for file in Makefile.in; do \
+			sed	-e "s|\(\man/\)\($$man\)|\1cyrus-\2|g" \
+				-e "s|\(\\\fB\)\($$1($$2)\\\fR\)|\1cyrus-\2|g" \
+				$$file > $$file.fixed; \
+			mv -f $$file.fixed $$file; \
+		done; \
+		if [ -f man/$${man} ]; then \
+			mv man/$${man} man/cyrus-$${man}; \
+		fi; \
+		shift 2; \
+	done
+	find ${WRKSRC} -type -f -print | \
+	xargs -n 1 ${GREP} -l -e /etc/imapd\.conf -e /etc/cyrus\.conf | \
+	while read file; do \
+		sed	-e "s|/etc/\(cyrus\.conf\)|${PKG_SYSCONFDIR}/\1|g" \
+			-e "s|/etc/\(imapd\.conf\)|${PKG_SYSCONFDIR}/\1|g" \
+			$${file} > $${file}.fixed; \
+		mv -f $${file}.fixed $${file}; \
+	done
 
 .include "../../mk/bsd.pkg.mk"
