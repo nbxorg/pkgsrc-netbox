@@ -21,7 +21,7 @@ BUILD_DEFS+= VARBASE
 USE_LANGUAGES+= c c++ C99
 CHECK_PORTABILITY_SKIP= configure.lineno
 
-MAKE_JOBS_SAFE=no
+#MAKE_JOBS_SAFE=no
 #PKGCONFIG_OVERRIDE+= libcyrus_min.pc.in
 #PKGCONFIG_OVERRIDE+= libcyrus_sieve.pc.in
 #PKGCONFIG_OVERRIDE+= libcyrus.pc.in
@@ -44,6 +44,7 @@ FILES_SUBST+=	CYRUS_GROUP=${CYRUS_GROUP}
 .include "../../mk/bsd.prefs.mk"
 
 
+CONFIGURE_ARGS+= --libexecdir=${PREFIX}/libexec/cyrus
 CONFIGURE_ARGS+= --with-cyrus-user=${CYRUS_USER}
 CONFIGURE_ARGS+= --with-cyrus-group=${CYRUS_USER}
 CONFIGURE_ARGS+= --with-sasl=${BUILDLINK_PREFIX.cyrus-sasl}
@@ -67,6 +68,13 @@ CONFIGURE_ARGS+= --enable-murder
 CONFIGURE_ARGS+= --enable-replication
 
 MAKE_ENV+= PERL=${PERL5:Q}
+REPLACE_PERL+= tools/rehash
+
+HTMLDIR= ${PREFIX}/share/doc/cyrus-imapd
+EGDIR= ${PREFIX}/share/examples/cyrus-imapd
+CONF_FILES= ${EGDIR}/imapd.conf ${PKG_SYSCONFDIR}/imapd.conf
+#CONF_FILES+= ${EGDIR}/normal.conf ${PKG_SYSCONFDIR}/cyrus.conf
+FILES_SUBST+= IMAPDCONF=${PKG_SYSCONFDIR}/imapd.conf
 
 .include "../../mk/pthread.buildlink3.mk"
 
@@ -95,5 +103,21 @@ post-patch:
 			$${file} > $${file}.fixed; \
 		mv -f $${file}.fixed $${file}; \
 	done
+
+post-install:
+	${INSTALL_SCRIPT} ${WRKSRC}/tools/migrate-metadata ${DESTDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/tools/undohash ${DESTDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/tools/dohash ${DESTDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/tools/mkimap ${DESTDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/tools/rehash ${DESTDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/tools/upgradesieve ${DESTDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/tools/masssievec ${DESTDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/tools/mknewsgroups ${DESTDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/tools/translatesieve ${DESTDIR}${PREFIX}/bin
+
+	${INSTALL_DATA_DIR} ${DESTDIR}${EGDIR}
+	${INSTALL_DATA} ${FILESDIR}/imapd.conf ${DESTDIR}${EGDIR}
+	${INSTALL_DATA_DIR} ${DESTDIR}${HTMLDIR}
+	
 
 .include "../../mk/bsd.pkg.mk"
