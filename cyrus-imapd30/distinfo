@@ -3,3 +3,10 @@ $NetBSD$
 SHA1 (cyrus-imapd-3.0.1.tar.gz) = 0b28d27e86c817c1f9fa8c06b076d58ce46acbec
 SHA512 (cyrus-imapd-3.0.1.tar.gz) = 0a2bf13b4793e642f3df53231fd66774e0c5ad753b436a7fb0645db6ee70121d0da245038527cc58cb078255fec3e7b32a6230c196cceea040f74813ef78e337
 Size (cyrus-imapd-3.0.1.tar.gz) = 10515460 bytes
+SHA1 (patch-lib_arrayu64.c) = 0484209fde0fd7a5c3fb64091567af5b01454d7c
+SHA1 (patch-lib_crc32.c) = 14c4126e24caf6cb8438c3b57bde7ebb6177a4ad
+SHA1 (patch-lib_cyrusdb-quotalegacy.c) = 897382cfae4c922e8fd5bd56665cda7d49d9d092
+SHA1 (patch-lib_glob.c) = 9622f9b0bc92f413b5aff69a447b1ca41a43a9de
+SHA1 (patch-lib_strarray.c) = 2e55847474a7b79ff0dfa32739850b0f571bb8f8
+SHA1 (patch-lib_util.h) = 094d8547329523807323b6f203752bf7dd354312
+SHA1 (patch-lib_xsha1.c) = 6f92bc46bcf378fdc451489d7a21e462c08b5538
