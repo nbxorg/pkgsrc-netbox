@@ -1,0 +1,24 @@
+#
+# Copy and paste the lines below to install the 64-bit tools set.
+#
+BOOTSTRAP_TAR="bootstrap-2017Q1-tools.tar.gz"
+BOOTSTRAP_SHA="a39d8dce904c2d0afb3cb570c671490153a71f15"
+
+# Download the bootstrap kit to the current directory.  Note that we currently
+# pass "-k" to skip SSL certificate checks as the GZ doesn't install them.
+curl -kO https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/${BOOTSTRAP_TAR}
+
+# Verify the SHA1 checksum.
+[ "${BOOTSTRAP_SHA}" = "$(/bin/digest -a sha1 ${BOOTSTRAP_TAR})" ] || echo "ERROR: checksum failure"
+
+# Verify PGP signature.  This step is optional, and requires gpg.
+curl -kO https://pkgsrc.joyent.com/packages/SmartOS/bootstrap/${BOOTSTRAP_TAR}.asc
+curl -sS https://pkgsrc.joyent.com/pgp/DE817B8E.asc | gpg --import
+gpg --verify ${BOOTSTRAP_TAR}{.asc,}
+
+# Install bootstrap kit to /opt/tools
+tar -zxpf ${BOOTSTRAP_TAR} -C /
+
+# Add to PATH/MANPATH.
+PATH=/opt/tools/sbin:/opt/tools/bin:$PATH
+MANPATH=/opt/tools/man:$MANPATH
