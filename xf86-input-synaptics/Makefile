@@ -1,16 +1,16 @@
 # $NetBSD$
 #
 
-DISTNAME=       xf86-input-synaptics-synaptics-1.2-branch
-PKGNAME=        xf86-input-synaptics-1.2.2
+DISTNAME=        xf86-input-synaptics-1.9.0
 CATEGORIES=     x11
-MASTER_SITES=   
-http://cgit.freedesktop.org/xorg/driver/xf86-input-synaptics/snapshot/
+#MASTER_SITES=   http://xorg.freedesktop.org/archive/individual/driver/ 
+MASTER_SITES=	${MASTER_SITE_XORG:=driver/}
+#http://cgit.freedesktop.org/xorg/driver/xf86-input-synaptics/snapshot/
+EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=     yuka@netbox.org
 HOMEPAGE=       http://cgit.freedesktop.org/xorg/driver/xf86-input-synaptics/
-COMMENT=        This is the Synaptics TouchPad driver for the modular Xorg 
-server
+COMMENT=        This is the Synaptics TouchPad driver for the modular Xorg server 
 LICENSE=        mit
 
 PKG_DESTDIR_SUPPORT=    user-destdir
@@ -29,6 +29,11 @@ pre-configure:
         cd ${WRKSRC} && ./autogen.sh
 
 #CONFIGURE_ARGS+=--prefix=/usr/pkg --sysconfdir=/etc/X11 --localstatedir=/var
+
+.include "../../x11/randrproto/buildlink3.mk"
+.include "../../x11/inputproto/buildlink3.mk"
+.include "../../x11/kbproto/buildlink3.mk"
+.include "../../x11/xproto/buildlink3.mk"
 
 .include "../../x11/modular-xorg-server/buildlink3.mk"
 
